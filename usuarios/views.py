@@ -22,7 +22,7 @@ def iniciar_sesion(request):
 # Sólo permite el ingreso si NO se está logueado. Caso contrario, redirige a 'home'
 # Esta validación es útil cuando se intenta ingresar forzando la URL
     if request.user.is_authenticated:
-        return redirect('home')
+        return redirect('core:home')
 
     if request.method == 'POST':
         formulario_login = AuthenticationForm(request, data=request.POST)

@@ -1,0 +1,61 @@
+{% extends 'core/base.html' %}
+{% block bloque_titulo %}
+    Listado de mensajes
+{% endblock bloque_titulo %}
+{% block bloque_estilos %}
+<style>
+    /* Estilos CSS */
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f2f2f2;
+    }
+    .detalle-conversacion {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+        background-color: #f5f5dc; /* Beige muy clarito */
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    .mensaje {
+        padding: 10px;
+        border-bottom: 1px solid #ddd;
+        margin-bottom: 10px;
+        display: flex;
+    }
+    .mensaje .contenido {
+        padding: 5px 10px;
+        border-radius: 10px;
+        max-width: 70%;
+    }
+    .mensaje.enviado .contenido {
+        background-color: #DCF8C6;
+        margin-left: auto; /* Alinea el contenido a la derecha */
+    }
+    .mensaje.recibido .contenido {
+        background-color: #EAEAEA;
+        margin-right: auto; /* Alinea el contenido a la izquierda */
+    }
+    .mensaje .de_user {
+        font-weight: bold;
+    }
+    .mensaje .fecha_hora {
+        color: #888;
+    }
+</style>
+{% endblock bloque_estilos %}
+{% block bloque_contenido %}
+<div class="detalle-conversacion">
+    <h1>Conversación con {{ intercambio.user_2.username }}</h1>
+    {% for mensaje in mensajes %}
+    <div class="mensaje {% if mensaje.de_user == request.user %}enviado{% else %}recibido{% endif %}">
+        <div class="contenido">
+            <p>{{ mensaje.mensaje }}</p>
+            <p class="fecha_hora">Enviado el {{ mensaje.fecha_hora_enviado }}</p>
+        </div>
+    </div>
+    {% endfor %}
+    <a href="{% url 'mensajes:home' %}" class="btn btn-outline-danger fst-italic">Volver a Mensajes</a>
+</div>
+
+{% endblock bloque_contenido %}

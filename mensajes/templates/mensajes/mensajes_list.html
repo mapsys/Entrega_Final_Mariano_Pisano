@@ -1,0 +1,46 @@
+{% extends 'core/base.html' %}
+{% block bloque_titulo %}
+    Listado de mensajes
+{% endblock bloque_titulo %}
+{% block bloque_estilos %}
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f2f2f2;
+    }
+    .detalle-conversacion {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+    h1 {
+        font-size: 24px;
+        margin-bottom: 20px;
+    }
+    .conversacion {
+        padding: 10px;
+        border-bottom: 1px solid #ddd;
+    }
+    .conversacion a {
+        color: #333;
+        text-decoration: none;
+    }
+    .conversacion a:hover {
+        text-decoration: underline;
+    }
+</style>
+{% endblock bloque_estilos %}
+{% block bloque_contenido %}
+<div class="detalle-conversacion">
+    <h1>Mis Conversaciones</h1>
+    {% for intercambio in intercambios %}
+    <div class="conversacion">
+        <img src="{{ intercambio.user_2.userextension.avatar.url }}" alt="Avatar" class="avatar">
+        <a href="{% url 'mensajes:detalle_conversacion' intercambio.id %}">{{ intercambio.user_2.username }}</a>
+    </div>
+    {% endfor %}
+</div>
+{% endblock bloque_contenido %}

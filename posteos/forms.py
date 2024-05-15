@@ -17,3 +17,5 @@ class PosteoForm(forms.ModelForm):
            "fecha_creacion": forms.DateInput(attrs={"class": "form-control", "type": "date"}),
            "imagen": forms.FileInput(attrs={"class": "form-control"}),
         }
+class FormularioBuscarPosts(forms.Form):
+    titulo = forms.CharField(max_length=255, required=False, widget=forms.TextInput(attrs={ 'class' : 'form-control' }))

@@ -8,6 +8,7 @@ urlpatterns = [
     path('', include('core.urls')),
     path('posteos/', include('posteos.urls')),
     path('usuarios/', include('usuarios.urls')),
+    path('mensajes/', include('mensajes.urls')),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

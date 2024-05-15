@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'posteos',
     'ckeditor',
     'usuarios',
+    'mensajes',
 ]
 
 MIDDLEWARE = [

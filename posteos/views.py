@@ -34,3 +34,17 @@ class NuevoPostView(LoginRequiredMixin, CreateView):
     def form_valid(self, form):
         form.instance.autor = self.request.user
         return super().form_valid(form)
+@login_required  
+def buscar_posts(request):
+    titulo = request.GET.get('titulo', None)
+
+    if titulo:
+        posts = models.Posteo.objects.filter(titulo__icontains=titulo)
+    else:
+        posts = models.Posteo.objects.all()
+
+    posts = posts.order_by('id')
+
+    formulario_buscar_posts = forms.FormularioBuscarPosts()
+
+    return render(request, 'posteos/buscar_posteos.html', { 'form' : formulario_buscar_posts, 'posts' : posts })
