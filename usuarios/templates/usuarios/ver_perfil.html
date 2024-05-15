@@ -1,0 +1,55 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% block bloque_header %}
+    Perfil del Usuario
+    {{ request.user.UserExtended.descripcion}}
+    {{ request.user}}
+    {{ request.user.id}}
+{% endblock bloque_header %}
+{% block bloque_contenido %}
+    <div class="profile-container"
+         style="max-width: 600px;
+                margin: 0 auto;
+                padding: 20px;
+                border: 1px solid #ccc;
+                border-radius: 10px;
+                background-color: #f9f9f9;
+                overflow: hidden">
+        <!-- Utilizamos overflow: hidden para que el contenedor abarque el contenido flotante -->
+        <img class="img-fluid rounded-circle mb-3"
+        {% comment  %}
+            
+
+             src="{% if request.user.UserExtended.avatar %}{{ request.user.UserExtended.avatar.url }}{% else %}{% static 'assets/img/blank-profile.jpg' %}{% endif %}"
+             {% endcomment %}
+             src="{{ request.user.UserExtended.avatar}}"
+             alt="Avatar"
+             style="width: 100px;
+                    height: auto;
+                    float: left;
+                    margin-right: 20px" />
+        <div class="profile-info" style="margin-bottom: 20px;">
+            <h2 style="color: #333;">Información del Perfil</h2>
+            <p style="margin: 5px 0; color: #666;">
+                <strong>Nombre de Usuario:</strong> {{ request.user.username }}
+            </p>
+            <p style="margin: 5px 0; color: #666;">
+                <strong>Correo Electrónico:</strong> {{ request.user.email }}
+            </p>
+            <p style="margin: 5px 0; color: #666;">
+                <strong>Nombre:</strong> {{ request.user.first_name }} {{ request.user.last_name }}
+            </p>
+        </div>
+        <div style="float: left;">
+            <!-- Alineamos el botón a la izquierda -->
+            <a class="btn btn-success"
+               href="{% url 'usuarios:editar_perfil' %}"
+               style="color: white">Editar Perfil</a>
+            <a class="btn btn-success"
+               href="{% url 'usuarios:cambiar_password' %}"
+               style="color: white">Cambiar Contraseña</a> <!-- Cambiamos el color de fondo a verde y el texto a blanco -->
+        </div>
+        <div style="clear: both;"></div>
+        <!-- Limpiamos los flotantes -->
+    </div>
+{% endblock bloque_contenido %}

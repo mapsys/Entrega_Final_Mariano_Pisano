@@ -1,0 +1,28 @@
+{% extends 'core/base.html' %}
+{% block bloque_header %}
+{% if request.GET.next %}
+    <p>Debes estar logeado para acceder a esa pagina</p>
+{% else %}
+    <p>Bienvenido a la página de inicio de sesión.</p>
+{% endif %}
+
+{% endblock bloque_header %}
+
+{% block bloque_contenido %}
+
+    <div class="container">
+        <h1 class="mt-4">Login</h1>
+    </div>
+
+    <form method="post">
+        {% csrf_token %}
+        <div class="form-group">
+        {{ form.as_p }}
+        <input type="hidden" name="next" value="{% url 'core:home' %}">
+    </div>
+        <button type="submit" class="btn btn-primary">Iniciar Sesión</button>
+        <a href="{% url 'core:home' %}" class="btn btn-secondary">Cancelar</a>
+    </form>
+
+
+{% endblock bloque_contenido %}

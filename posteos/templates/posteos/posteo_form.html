@@ -1,0 +1,20 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% block bloque_titulo %}
+    Listado de Publicaciones
+{% endblock bloque_titulo %}
+{% block bloque_contenido %}
+    <div class="form-group">
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <table>
+                {{ form.media }}
+                {{ form }}
+            </table>
+            <button type="submit" class="btn btn-primary my-5 bg-success ">Guardar</button>
+        </form>
+    </div>
+    <div class="fs-3 pb-4">
+        <a class="btn btn-primary" href="{% url 'posteos:home' %}">Volver a Clientes</a>
+    </div>
+{% endblock bloque_contenido %}
