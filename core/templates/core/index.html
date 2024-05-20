@@ -5,18 +5,20 @@
         <div class="container position-relative">
             <div class="row justify-content-center">
                 <div class="col-xl-4">
-                    <h1 class="text-center display-4 fw-bolder">
+
                         {% if request.user.is_authenticated %}
                             {% if request.user.first_name %}
-                                ¡Bienvenido, {{ request.user.first_name }}!
+                            <h1 class="text-center display-4 fw-bolder">    
+                            ¡Bienvenido, {{ request.user.first_name }}!</h1>
+                            <h2> Empeza a disfrutar toda la informacion que tenemos para</h2>
                             {% else %}
-                                ¡Bienvenido!
+                            <h1 class="text-center display-4 fw-bolder">¡Bienvenido!</h1>
                             {% endif %}
                         {% else %}
-                            Viajar es un placer!!!!! 
-                            Y aqui te conectamos con viajeros de todos el mundo
+                        <h1 class="text-center display-4 fw-bolder"> Viajar es un placer!!!!! </h1>
+                            <h2> Y aqui te conectamos con viajeros de todos el mundo</h2>
                         {% endif %}
-                    </h1>
+                    
                 </div>
             </div>
         </div>

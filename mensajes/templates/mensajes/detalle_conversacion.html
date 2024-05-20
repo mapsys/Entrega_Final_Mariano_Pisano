@@ -116,11 +116,27 @@
     <a href="{% url 'mensajes:home' %}" class="btn btn-outline-danger fst-italic">Volver a Mensajes</a>
 
     <div class="nuevo-mensaje">
-        <form method="post" action="{% url 'mensajes:nuevo_mensaje' intercambio.id %}">
+        <form id="form-nuevo-mensaje" method="post" action="{% url 'mensajes:nuevo_mensaje' intercambio.id %}">
             {% csrf_token %}
-            <textarea name="mensaje" placeholder="Escribe tu mensaje..." required></textarea>
+            <textarea id="textarea-nuevo-mensaje" name="mensaje" placeholder="Escribe tu mensaje..." required></textarea>
             <button type="submit">Enviar</button>
         </form>
     </div>
 </div>
 {% endblock bloque_contenido %}
+
+{% block bloque_scripts %}
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const form = document.getElementById('form-nuevo-mensaje');
+        const textarea = document.getElementById('textarea-nuevo-mensaje');
+
+        textarea.addEventListener('keypress', function(event) {
+            if (event.key === 'Enter' && !event.shiftKey) {
+                event.preventDefault();
+                form.submit();
+            }
+        });
+    });
+</script>
+{% endblock bloque_scripts %}

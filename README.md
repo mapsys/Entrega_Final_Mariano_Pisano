@@ -23,6 +23,7 @@ Tambien posee un usuario no admin creado
 3. Acerca de mi: Un poco de informacion del creador de la pagina
 ---- Si estas logeado-----
 4. Mensajeria: Te permite intercambiar mensajes con diferentes usuarios de la plataforma
+    NOTA: el nuevo mensaje se puede enviar presionando enter
 5. Posteos: Aqui podras ver todos los posts de nuestros lectores
     a. Ver posteos: Podras ver una lista de los posteos existentes
     b. Nuevo posteo: Podras crear una entrada nueva en nuestro blog
@@ -43,3 +44,5 @@ Tambien posee un usuario no admin creado
 
 ## Mejoras futuras
 Se puede mejorar MUCHISIMO el diseño de la pagina para darle mejor aspecto y mas moderno
+marcar los mensajes como Leidos y mostrar en el menu Mensajeria una campanita de "Mensajes nuevos sin leer"
+hacer que cuando me manden un nuevo mensaje mientras yo estoy en la pagina de una conversacion lo pueda ver aparecer sin tener que refrescar la pagina (se lo pregunte a ChatGPT pero no me parecio valido solo copiar y pegar el codigo aca)
