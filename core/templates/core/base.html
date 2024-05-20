@@ -21,6 +21,16 @@
     <link href="{% static 'css/styles.css' %}" rel="stylesheet" />
     {% block bloque_estilos %}
     {% endblock bloque_estilos %}
+    <style>
+        html, body {
+            height: 100%;
+        }
+        .masthead {
+            background: url('{% static "path/to/your/image.jpg" %}') no-repeat center center;
+            background-size: cover;
+            height: calc(100vh - 80px - 80px); /* Ajusta esto según la altura del navbar y del footer */
+        }
+    </style>
 </head>
 <body>
 {% load static %}
@@ -128,11 +138,18 @@
                color: black;
                font-weight: bold;
                height: 80px"
-        class="footer mt-auto py-3 fixed-bottom ">
+        class="footer mt-auto py-3 fixed-bottom">
   <div class="container">
-    <p class="m-0 text-center text-white">Copyright &copy; Mariano Pisano - Entrega Final (2024)</p>
+    <p class="m-0 text-center text-white">
+      Copyright &copy; 
+      <a href="{% url 'core:about' %}" style="color: white; text-decoration: underline;">
+        Mariano Pisano
+      </a> 
+      - Entrega Final (2024)
+    </p>
   </div>
 </footer>
+
 {% block bloque_scripts %}
   
 {% endblock bloque_scripts %}
