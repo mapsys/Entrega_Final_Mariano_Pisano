@@ -1,7 +1,9 @@
 {% extends 'core/base.html' %}
+
 {% block bloque_titulo %}
     Listado de mensajes
 {% endblock bloque_titulo %}
+
 {% block bloque_estilos %}
 <style>
     /* Estilos CSS */
@@ -42,11 +44,67 @@
     .mensaje .fecha_hora {
         color: #888;
     }
+    .nuevo-mensaje {
+        display: flex;
+        flex-direction: column;
+        margin-top: 20px;
+    }
+    .nuevo-mensaje textarea {
+        width: 100%;
+        padding: 10px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+        margin-bottom: 10px;
+    }
+    .nuevo-mensaje button {
+        align-self: flex-end;
+        padding: 10px 20px;
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+    .nuevo-mensaje button:hover {
+        background-color: #45a049;
+    }
+    /* Estilos para el sub-header */
+    .post-subtitle {
+        background: linear-gradient(to bottom, coral, #ffcccb); /* Degradado de color */
+        color: black;
+        font-weight: bold;
+        text-align: center;
+        padding: 15px 0;
+        margin-top: 0;
+        margin-bottom: 20px;
+        border-bottom: 1px solid coral; /* Línea sutil con la navbar */
+        border-top: none; /* Sin borde redondeado en la parte superior */
+    }
 </style>
 {% endblock bloque_estilos %}
+
+{% block bloque_sub_header %}
+    {% if request.user == intercambio.user_1 %}
+        <h3 class="post-subtitle">
+            {% if intercambio.user_2.get_full_name %}
+                Conversación con {{ intercambio.user_2.get_full_name }} ({{ intercambio.user_2.username }})
+            {% else %}
+                Conversación con {{ intercambio.user_2.username }}
+            {% endif %}
+        </h3>
+    {% else %}
+        <h3 class="post-subtitle">
+            {% if intercambio.user_1.get_full_name %}
+                Conversación con {{ intercambio.user_1.get_full_name }} ({{ intercambio.user_1.username }})
+            {% else %}
+                Conversación con {{ intercambio.user_1.username }}
+            {% endif %}
+        </h3>
+    {% endif %}
+{% endblock bloque_sub_header %}
+
 {% block bloque_contenido %}
 <div class="detalle-conversacion">
-    <h1>Conversación con {{ intercambio.user_2.username }}</h1>
     {% for mensaje in mensajes %}
     <div class="mensaje {% if mensaje.de_user == request.user %}enviado{% else %}recibido{% endif %}">
         <div class="contenido">
@@ -56,6 +114,13 @@
     </div>
     {% endfor %}
     <a href="{% url 'mensajes:home' %}" class="btn btn-outline-danger fst-italic">Volver a Mensajes</a>
-</div>
 
+    <div class="nuevo-mensaje">
+        <form method="post" action="{% url 'mensajes:nuevo_mensaje' intercambio.id %}">
+            {% csrf_token %}
+            <textarea name="mensaje" placeholder="Escribe tu mensaje..." required></textarea>
+            <button type="submit">Enviar</button>
+        </form>
+    </div>
+</div>
 {% endblock bloque_contenido %}

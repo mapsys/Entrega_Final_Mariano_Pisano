@@ -1,0 +1,24 @@
+{% extends 'core/base.html' %}
+
+{% block bloque_titulo %}
+    Iniciar nueva conversación
+{% endblock bloque_titulo %}
+
+{% block bloque_contenido %}
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card mt-5">
+                <div class="card-body">
+                    <h5 class="card-title">Selecciona un usuario para iniciar la conversación</h5>
+                    <form method="post">
+                        {% csrf_token %}
+                        {{ form.as_p }}
+                        <button type="submit" class="btn btn-primary">Iniciar Conversación</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock bloque_contenido %}
