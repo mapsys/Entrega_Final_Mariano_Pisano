@@ -1,15 +1,15 @@
 {% extends 'core/base.html' %}
 {% load static %}
-
 {% block titulo %}
     Logout
 {% endblock titulo %}
-
 {% block bloque_contenido %}
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-12 text-center">
-                <img src="{% static 'assets/img/thankyou.jpeg' %}" class="img-fluid" alt="Gracias por tu visita">
+                <img src="{% static 'assets/img/thankyou.jpeg' %}"
+                     class="img-fluid"
+                     alt="Gracias por tu visita">
                 <div class="position-absolute top-50 start-50 translate-middle">
                     <h1 class="display-4 mt-4">¡Gracias por visitarnos hoy, {{ request.user.first_name }}!</h1>
                     <p class="lead">Te esperamos nuevamente pronto.</p>
