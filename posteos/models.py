@@ -3,7 +3,9 @@ from ckeditor.fields import RichTextField
 from django.contrib.auth.models import User
 
 # Create your models here.
-
+'''
+Modelo de posts
+'''
 class Posteo(models.Model):
 
     titulo         = models.CharField(max_length=255)

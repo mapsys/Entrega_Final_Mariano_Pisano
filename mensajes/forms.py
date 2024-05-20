@@ -1,7 +1,9 @@
 from django import forms
 from django.contrib.auth.models import User
 
-
+'''
+Formulario para creacion de nuevo intercambio de mensajes
+'''
 class NuevoIntercambioForm(forms.Form):
     user_id = forms.ModelChoiceField(
         queryset=User.objects.none(),

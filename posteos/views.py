@@ -5,6 +5,8 @@ from django.urls import reverse_lazy
 from django.views.generic import CreateView, DeleteView, DetailView, ListView, UpdateView
 from . import models, forms
 
+'''
+Vista funcion para ver el listado de posteos existentes'''
 # Create your views here.
 @login_required
 def posteo_list(request):
@@ -17,14 +19,13 @@ def posteo_list(request):
     context = {"posts": query}
     return render(request, "posteos/posteo_list.html", context)
 
+'''
+Vista de clase que permite ver el detalle de un posteo'''
 class PosteoDetail(LoginRequiredMixin, DetailView):
     model = models.Posteo
 
-class PosteoCreate(LoginRequiredMixin, CreateView):
-    model = models.Posteo
-    form_class = forms.PosteoForm
-    success_url = reverse_lazy("posteos:home")
-
+'''
+Vista de clase que permite crear un nuevoi posteo'''
 class NuevoPostView(LoginRequiredMixin, CreateView):
     model         = models.Posteo
     template_name = 'posteos/posteo_form.html'
@@ -34,6 +35,8 @@ class NuevoPostView(LoginRequiredMixin, CreateView):
     def form_valid(self, form):
         form.instance.autor = self.request.user
         return super().form_valid(form)
+'''
+Vista funcion que permite buscar un posteo'''
 @login_required  
 def buscar_posts(request):
     titulo = request.GET.get('titulo', None)

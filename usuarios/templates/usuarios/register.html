@@ -1,19 +1,37 @@
 {% extends 'core/base.html' %}
-{% block titulo %}
-    Registro
-{% endblock titulo %}
-{% block bloque_contenido %}
-    <div class="container">
-        <h1 class="mt-4">Registro de usuario</h1>
-    </div>
-    <form class="p-3 p-lg-4" method="post">
-        {% csrf_token %}
-        <div class="form-group"> 
-        <table class="col-md-5 fst-italic">
-            {{ form.as_p }}
-        </table>
-    </div>
-        <button type="submit" class="btn btn-success">Registrar nuevo usuario</button>
-    </form>
-{% endblock bloque_contenido %}
 
+{% block bloque_estilos %}
+<style>
+    .container {
+        text-align: center;
+    }
+
+    .form-group.row {
+        margin-bottom: 15px;
+    }
+</style>
+{% endblock bloque_estilos %}
+
+{% block bloque_header %}
+<div class="container text-center mt-4">
+    <div class="alert alert-info" role="alert">
+        Bienvenido al formulario de registro.
+    </div>
+</div>
+{% endblock bloque_header %}
+
+{% block bloque_contenido %}
+<section class="bg-light">
+    <div class="container">
+        <form class="p-3 p-lg-4" action={% url 'usuarios:register' %} method="POST">
+            {% csrf_token %}
+            <table class="col-md-5 fst-italic">
+                {{ form.as_table }}
+            </table>
+            <div class="py-3 py-lg-4">
+                <button class="btn btn-outline-primary fst-italic">Registrarme</button>
+            </div>
+        </form>
+    </div>
+</section>
+{% endblock bloque_contenido %}

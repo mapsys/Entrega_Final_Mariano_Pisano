@@ -1,0 +1,85 @@
+{% extends 'core/base.html' %}
+
+{% block bloque_titulo %}
+    Acerca de Mí
+{% endblock bloque_titulo %}
+
+{% block bloque_estilos %}
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f2f2f2;
+    }
+    .about-section {
+        background-color: #fff;
+        padding: 50px 0;
+    }
+    .about-section h2 {
+        font-size: 36px;
+        margin-bottom: 20px;
+    }
+    .about-section p {
+        font-size: 18px;
+        line-height: 1.6;
+    }
+    .skills-section {
+        background-color: #f5f5f5;
+        padding: 50px 0;
+    }
+    .skills-section h2 {
+        font-size: 36px;
+        margin-bottom: 20px;
+    }
+    .skills-section ul {
+        list-style-type: none;
+        padding: 0;
+    }
+    .skills-section li {
+        margin-bottom: 10px;
+    }
+</style>
+{% endblock bloque_estilos %}
+
+{% block bloque_contenido %}
+<section class="about-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 mx-auto">
+                <h2>Acerca de Mí</h2>
+                <p>
+                    ¡Hola! Soy Mariano Pisano, un profesional de IT con más de 30 años de experiencia. Durante los últimos 20 años me he especializado en testing, trabajando en diversas plataformas y herramientas como UFT, CodeComplete, Pytest, Cypress, entre otras.
+                    Actualmente, estoy enfocado en mejorar mis habilidades en Python para poder desarrollar soluciones más eficientes y modernas.
+                </p>
+                <p>
+                    Soy licenciado en Sistemas por la Universidad de Buenos Aires (UBA), una institución reconocida por su excelencia académica en Argentina y a nivel internacional.
+                </p>
+                <p>
+                    Mi pasión por la calidad del software me ha llevado a explorar y dominar varias metodologías de testing y técnicas de automatización. He trabajado en proyectos de gran escala donde la precisión y la eficiencia son clave para el éxito del producto.
+                </p>
+                <p>
+                    Además de mis habilidades técnicas, también tengo experiencia en liderazgo de equipos y gestión de proyectos, lo que me ha permitido no solo contribuir con mi conocimiento técnico, sino también liderar y guiar a otros profesionales en el campo del testing.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="skills-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 mx-auto">
+                <h2>Habilidades</h2>
+                <ul>
+                    <li>Testing de software</li>
+                    <li>Automatización de pruebas con UFT, CodeComplete, Pytest, Cypress, etc.</li>
+                    <li>Desarrollo en Python</li>
+                    <li>Experiencia en diversas plataformas de software</li>
+                    <li>Liderazgo de equipos y gestión de proyectos</li>
+                    <li>Metodologías ágiles y de desarrollo de software</li>
+                    <li>Análisis y mejora continua de procesos de testing</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock bloque_contenido %}

@@ -11,12 +11,10 @@ from .models import UserExtended
 from django.contrib.auth import login
 
 
-# # Create your views here.
-# class CustomLoginView(LoginView):
-#     authentication_form = CustomAuthenticationForm
-#     template_name = "usuarios/login.html"
 
-
+'''
+View de funcion para hacer Login
+'''
 def iniciar_sesion(request):
 
 # Sólo permite el ingreso si NO se está logueado. Caso contrario, redirige a 'home'
@@ -36,6 +34,8 @@ def iniciar_sesion(request):
 
     return render(request, 'usuarios/login.html', { 'form' : formulario_login })
 
+
+''' View de funcion para registrar un user'''
 def register(request: HttpRequest) -> HttpResponse:
     if request.method == "POST":
         form = CustomUserCreationForm(request.POST)
@@ -46,6 +46,8 @@ def register(request: HttpRequest) -> HttpResponse:
         form = CustomUserCreationForm()
     return render(request, "usuarios/register.html", {"form": form})
 
+'''
+View de funcion para ver el perfil de un usuario'''
 @login_required
 def ver_perfil(request):
     return render(request, 'usuarios/ver_perfil.html')
@@ -63,6 +65,8 @@ def ver_perfil(request):
 #     return render(request, "usuarios/editar_perfil.html", context={"form": form})
 
 
+'''
+View de funcion para editar el perfil de un usuario'''
 @login_required
 def editarPerfil(request):
 
@@ -92,6 +96,8 @@ def editarPerfil(request):
 
     return render(request, "usuarios/editar_perfil.html", {"form": miFormulario, "usuario": usuario})
 
+'''
+View de clase para cambiar clave de un usuario'''
 class CambiarPassword(LoginRequiredMixin, PasswordChangeView):
     template_name="usuarios/cambiar_password.html"
     success_url = reverse_lazy("usuarios:ver_perfil")

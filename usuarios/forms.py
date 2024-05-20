@@ -3,6 +3,11 @@ from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth.models import User
 from . import models
 from django.contrib.auth.forms import UserChangeForm
+
+
+'''
+Form para Login
+'''
 class CustomAuthenticationForm(AuthenticationForm):
     class Meta:
         model = models.User
@@ -11,6 +16,9 @@ class CustomAuthenticationForm(AuthenticationForm):
             "username": forms.TextInput(attrs={"class": "form-control"}),
             "password": forms.PasswordInput(attrs={"class": "form-control"}),
         }
+
+'''
+Form de creacion de usuarios'''
 class CustomUserCreationForm(UserCreationForm):
     email = forms.EmailField(required=True)
     password1 = forms.CharField(label='Password', widget=forms.PasswordInput)
@@ -30,6 +38,10 @@ class UserExtended(forms.ModelForm):
         model = models.User
         fields = ["email", "first_name", "last_name"]
 
+
+
+'''
+Formulario para edicion de perfil'''
 class UserEditForm(UserChangeForm):
     password = None
     email = forms.EmailField(required=True)

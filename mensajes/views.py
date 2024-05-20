@@ -5,6 +5,9 @@ from django.contrib.auth.models import User
 from .forms import NuevoIntercambioForm
 from django.db import models
 
+'''
+Vista funcion quye muestra la lista de mensajes
+donde un usuario esta involucrado'''
 @login_required
 def mensajes_list(request):
     # Obtener los intercambios donde user_1 es el usuario actual
@@ -14,13 +17,17 @@ def mensajes_list(request):
  
     return render(request, 'mensajes/mensajes_list.html', {'intercambios': intercambios})
 
+'''
+Vista funcion que muestra los mensajes dentro de un intercambio'''
 @login_required
 def detalle_conversacion(request, intercambio_id):
     intercambio = get_object_or_404(Intercambio, id=intercambio_id)
     mensajes = Mensaje.objects.filter(chat=intercambio).order_by('fecha_hora_enviado')
     return render(request, 'mensajes/detalle_conversacion.html', {'intercambio': intercambio, 'mensajes': mensajes})
 
-
+'''
+Vista funcion que permite agregar un nuevo mensaje a un intercambio
+'''
 def nuevo_mensaje(request, intercambio_id):
     if request.method == 'POST':
         mensaje_texto = request.POST.get('mensaje')
@@ -31,7 +38,9 @@ def nuevo_mensaje(request, intercambio_id):
             mensaje=mensaje_texto
         )
         return redirect('mensajes:detalle_conversacion', intercambio_id=intercambio_id)
-    
+'''
+Vista Funcion que permite iniciar un nuevo intercambio de mensajes
+'''
 @login_required
 def iniciar_conversacion(request):
     if request.method == 'POST':

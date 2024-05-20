@@ -1,10 +1,7 @@
 {% extends 'core/base.html' %}
 {% load static %}
 {% block bloque_header %}
-    Perfil del Usuario
-    {{ request.user.UserExtended.descripcion}}
-    {{ request.user}}
-    {{ request.user.id}}
+
 {% endblock bloque_header %}
 {% block bloque_contenido %}
     <div class="profile-container"
@@ -17,12 +14,7 @@
                 overflow: hidden">
         <!-- Utilizamos overflow: hidden para que el contenedor abarque el contenido flotante -->
         <img class="img-fluid rounded-circle mb-3"
-        {% comment  %}
-            
-
              src="{% if request.user.UserExtended.avatar %}{{ request.user.UserExtended.avatar.url }}{% else %}{% static 'assets/img/blank-profile.jpg' %}{% endif %}"
-             {% endcomment %}
-             src="{{ request.user.UserExtended.avatar}}"
              alt="Avatar"
              style="width: 100px;
                     height: auto;

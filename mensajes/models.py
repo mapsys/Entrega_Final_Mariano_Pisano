@@ -1,7 +1,12 @@
 from django.db import models
 from django.contrib.auth.models import User
 
-
+'''
+Modelo para intercambio de mensajes
+Tenemos una clase principal que es Intercambio
+que contiene la configuracion del intercambio
+y despues la clase mensajes que mantiene cada mensaje perteneciente a un intercambio
+'''
 class Intercambio(models.Model):
 
     user_1    = models.ForeignKey(User, on_delete=models.CASCADE, related_name='user_1')
