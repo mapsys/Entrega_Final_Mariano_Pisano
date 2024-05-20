@@ -4,6 +4,7 @@ from .models import Intercambio, Mensaje
 from django.contrib.auth.models import User
 from .forms import NuevoIntercambioForm
 from django.db import models
+from django.contrib import messages
 
 '''
 Vista funcion quye muestra la lista de mensajes
@@ -67,3 +68,21 @@ def iniciar_conversacion(request):
         form = NuevoIntercambioForm(user=request.user)
 
     return render(request, 'mensajes/iniciar_conversacion.html', {'form': form})
+
+@login_required
+def confirmar_eliminacion(request, intercambio_id):
+    intercambio = get_object_or_404(Intercambio, id=intercambio_id)
+    return render(request, 'mensajes/confirmar_eliminacion.html', {'intercambio': intercambio})
+@login_required
+def borrar_intercambio(request, intercambio_id):
+    intercambio = get_object_or_404(Intercambio, id=intercambio_id)
+    
+    if request.method == 'POST':
+        if request.user == intercambio.user_1 or request.user == intercambio.user_2:
+            intercambio.delete()
+            messages.success(request, 'Intercambio borrado correctamente.')
+        else:
+            messages.error(request, 'No tienes permisos para borrar este intercambio.')
+        return redirect('mensajes:home')  # Asegúrate de usar la URL correcta para listar las conversaciones
+    
+    return render(request, 'mensajes/confirmar_eliminacion.html', {'intercambio': intercambio})

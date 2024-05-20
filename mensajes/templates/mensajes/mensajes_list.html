@@ -27,6 +27,11 @@
         border-bottom: 1px solid #ddd;
         display: flex;
         align-items: center;
+        justify-content: space-between;
+    }
+    .conversacion-info {
+        display: flex;
+        align-items: center;
     }
     .conversacion a {
         color: #333;
@@ -58,6 +63,17 @@
     .nuevo-conversacion a:hover {
         background-color: #0056b3;
     }
+    .borrar-conversacion-btn {
+        background-color: #dc3545;
+        color: white;
+        border: none;
+        padding: 5px 10px;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+    .borrar-conversacion-btn:hover {
+        background-color: #c82333;
+    }
 </style>
 {% endblock bloque_estilos %}
 
@@ -66,11 +82,16 @@
     <h1>Mis Conversaciones</h1>
     {% for intercambio in intercambios %}
     <div class="conversacion">
-        <img src="{{ intercambio.user_2.userextension.avatar.url }}" alt="Avatar" class="avatar">
-        {% if intercambio.user_1 == request.user %}
-            <a href="{% url 'mensajes:detalle_conversacion' intercambio.id %}">{{ intercambio.user_2.username }}</a>
-        {% else %}
-            <a href="{% url 'mensajes:detalle_conversacion' intercambio.id %}">{{ intercambio.user_1.username }}</a>
+        <div class="conversacion-info">
+            <img src="{{ intercambio.user_2.userextension.avatar.url }}" alt="Avatar" class="avatar">
+            {% if intercambio.user_1 == request.user %}
+                <a href="{% url 'mensajes:detalle_conversacion' intercambio.id %}">{{ intercambio.user_2.username }}</a>
+            {% else %}
+                <a href="{% url 'mensajes:detalle_conversacion' intercambio.id %}">{{ intercambio.user_1.username }}</a>
+            {% endif %}
+        </div>
+        {% if intercambio.user_1 == request.user or intercambio.user_2 == request.user %}
+            <a href="{% url 'mensajes:confirmar_eliminacion' intercambio.id %}" class="borrar-conversacion-btn">Borrar</a>
         {% endif %}
     </div>
     {% endfor %}

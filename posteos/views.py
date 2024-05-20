@@ -1,10 +1,10 @@
-from django.shortcuts import render
+from django.shortcuts import get_object_or_404, redirect, render
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, DeleteView, DetailView, ListView, UpdateView
 from . import models, forms
-
+from django.contrib import messages
 '''
 Vista funcion para ver el listado de posteos existentes'''
 # Create your views here.
@@ -51,3 +51,22 @@ def buscar_posts(request):
     formulario_buscar_posts = forms.FormularioBuscarPosts()
 
     return render(request, 'posteos/buscar_posteos.html', { 'form' : formulario_buscar_posts, 'posts' : posts })
+
+@login_required
+def confirmar_eliminacion(request, posteo_id):
+    posteo = get_object_or_404(models.Posteo, id=posteo_id)
+    return render(request, 'posteos/confirmar_eliminacion.html', {'posteo': posteo})
+
+@login_required
+def borrar_posteo(request, posteo_id):
+    posteo = get_object_or_404(models.Posteo, id=posteo_id)
+    
+    if request.method == 'POST':
+        if request.user == posteo.autor:
+            posteo.delete()
+            messages.success(request, 'Post eliminado correctamente.')
+        else:
+            messages.error(request, 'No tienes permisos para eliminar este post.')
+        return redirect('posteos:home')  # Asegúrate de usar la URL correcta para listar los posteos
+    
+    return render(request, 'posteos/confirmar_eliminacion.html', {'posteo': posteo})
