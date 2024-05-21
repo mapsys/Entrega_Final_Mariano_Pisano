@@ -74,6 +74,9 @@
                     <div class="d-flex justify-content-end">
                         <a href="{% url 'posteos:confirmar_eliminacion' object.id %}" class="btn btn-danger mt-3">Eliminar</a>
                     </div>
+                    <div class="fs-3 pb-4">
+                        <a class="btn btn-primary" href="{% url 'posteos:home' %}">Volver a Posteos</a>
+                    </div>
                     {% endif %}
                 </div>
             </div>
